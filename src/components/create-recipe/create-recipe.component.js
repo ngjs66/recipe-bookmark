@@ -1,22 +1,38 @@
 import React, { Component } from 'react';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 
 export default class CreateRecipe extends Component {
     constructor(props) {
         super(props);
 
+        // points "this.state" to class
+        this.onChangeRecipename = this.onChangeRecipename.bind(this);
+        this.onChangeDescription = this.onChangeDescription.bind(this);
+        this.onChangeDuration = this.onChangeDuration.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+
         this.state = {
-            username: '',
+            recipeName: '',
             description: '',
             duration: 0,
+            date: new Date(),
             tags: []
         }
 
     }
 
     // Methods start
-    onChangeUsername(e) {
+    componentDidMount() {  // React lifecycle method; called before anything displays on page
+        this.setState ({
+            recipeName:'Input recipe name',
+            tags: ['Pasta', 'Pizza', 'Burger', 'Noodles']
+        })
+    }
+
+    onChangeRecipename(e) {
         this.setState({
-            username: e.target.value
+            recipeName: e.target.value
         });
     }
 
@@ -31,29 +47,95 @@ export default class CreateRecipe extends Component {
             duration: e.target.value
         });
     }
-    // Methods end
 
+    onChangeDate(date) {
+        this.setState({
+            date: date
+        })
+    }
+    
     onSubmit(e) {
         // prevents form from changing to default after Submit button is pressed
         e.preventDefault();
-
+        
         const recipe = {
-            username: this.state.username,
+            recipeName: this.state.recipeName,
             description: this.state.description,
-            duration: this.state.duration
+            duration: this.state.duration,
+            date: this.state.date
         }
-
+        
         console.log(recipe)
-
+        
         // brings user back to homepage after the form is submitted to db
         window.location = '/';
     }
+    // Methods end
 
     render() {
         return(
-            <div>
-                <p>You are on the Create Recipe component!</p>
-            </div>
+        <div>
+            <h3>Create New Recipe</h3>
+            <form onSubmit={this.onSubmit}>
+                <div className="form-group"> 
+                    <label>Name of Recipe: </label>
+                    <input  type="text"
+                        required
+                        className="form-control"
+                        value={this.state.recipeName}
+                        onChange={this.onChangeRecipename}
+                        />
+                </div>
+                <div className="form-group"> 
+                    <label>Description: </label>
+                    <input  type="text"
+                        required
+                        className="form-control"
+                        value={this.state.description}
+                        onChange={this.onChangeDescription}
+                        />
+                </div>
+                <div className="form-group">
+                    <label>Cooking duration/time (in minutes): </label>
+                    <input 
+                        type="text" 
+                        className="form-control"
+                        value={this.state.duration}
+                        onChange={this.onChangeDuration}
+                        />
+                </div>
+                <div className="form-group"> 
+                    <label>Tags: </label>
+                    <select ref="userInput"
+                        required
+                        className="form-control"
+                        value={this.state.recipeName}
+                        onChange={this.onChangeRecipename}>
+                        {   
+                            this.state.tags.map(function(tag) {
+                                return <option 
+                                    key={tag}
+                                    value={tag}>{tag}
+                                    </option>;
+                            })
+                        }
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label>Date: </label>
+                    <div>
+                        <DatePicker
+                          selected={this.state.date}
+                          onChange={this.onChangeDate}
+                        />
+                    </div>
+                </div>
+
+                <div className="form-group">
+                    <input type="submit" value="Save Recipe" className="btn btn-primary" />
+                </div>
+            </form>
+          </div>
         )
     }
 }
