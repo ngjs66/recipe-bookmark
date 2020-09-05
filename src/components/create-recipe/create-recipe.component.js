@@ -27,8 +27,8 @@ export default class CreateRecipe extends Component {
     // Methods start
     componentDidMount() {  // React lifecycle method; called before anything displays on page
         this.setState ({
-            recipeName:'Input recipe name',
-            description: 'What is in it?',
+            // recipeName:'Input recipe name',
+            // description: 'What is in it?',
             tags: ['Pasta', 'Pizza', 'Burger', 'Noodles']
         })
     }
@@ -65,7 +65,8 @@ export default class CreateRecipe extends Component {
             recipeName: this.state.recipeName,
             description: this.state.description,
             duration: this.state.duration,
-            date: this.state.date
+            date: this.state.date,
+            tags: this.state.tags
         }
         
         console.log(recipes)

@@ -23,11 +23,11 @@ export default class EditRecipe extends Component {
 
     // Methods start
     componentDidMount() {  // React lifecycle method; called before anything displays on page
-        // this.setState ({
-        //     recipeName:'Input recipe name',
-        //     description: 'What is in it?',
-        //     tags: ['Pasta', 'Pizza', 'Burger', 'Noodles']
-        // })
+        this.setState ({
+            recipeName:'Input recipe name',
+            description: 'What is in it?',
+            tags: ['Pasta', 'Pizza', 'Burger', 'Noodles']
+        })
     }
 
     onChangeRecipename(e) {
@@ -66,6 +66,7 @@ export default class EditRecipe extends Component {
         }
         
         console.log(recipes)
+        console.log("Your changes has been saved!")
         
         // brings user back to homepage after the form is submitted to db
         window.location = '/';
@@ -132,7 +133,7 @@ export default class EditRecipe extends Component {
                 </div>
 
                 <div className="form-group">
-                    <input type="submit" value="Save Edited Recipe" className="btn btn-primary" />
+                    <input type="submit" value="Save Changes" className="btn btn-primary" />
                 </div>
             </form>
           </div>
