@@ -3,13 +3,15 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 export default class CreateRecipe extends Component {
+    // super(props) allows us to use props of constructor
     constructor(props) {
         super(props);
 
-        // points "this.state" to class
+        // points "this.state" to class CreateRecipe
         this.onChangeRecipename = this.onChangeRecipename.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeDuration = this.onChangeDuration.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -26,6 +28,7 @@ export default class CreateRecipe extends Component {
     componentDidMount() {  // React lifecycle method; called before anything displays on page
         this.setState ({
             recipeName:'Input recipe name',
+            description: 'What is in it?',
             tags: ['Pasta', 'Pizza', 'Burger', 'Noodles']
         })
     }
@@ -55,17 +58,17 @@ export default class CreateRecipe extends Component {
     }
     
     onSubmit(e) {
-        // prevents form from changing to default after Submit button is pressed
+        // prevents form (on our webpage) from changing to default after Submit button is pressed
         e.preventDefault();
         
-        const recipe = {
+        const recipes = {
             recipeName: this.state.recipeName,
             description: this.state.description,
             duration: this.state.duration,
             date: this.state.date
         }
         
-        console.log(recipe)
+        console.log(recipes)
         
         // brings user back to homepage after the form is submitted to db
         window.location = '/';
@@ -122,7 +125,7 @@ export default class CreateRecipe extends Component {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label>Date: </label>
+                    <label>Date (of upload): </label>
                     <div>
                         <DatePicker
                           selected={this.state.date}
