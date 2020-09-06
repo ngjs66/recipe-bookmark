@@ -8,6 +8,7 @@ export default class CreateRecipe extends Component {
         super(props);
 
         // points "this.state" to class CreateRecipe
+        this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeRecipename = this.onChangeRecipename.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeDuration = this.onChangeDuration.bind(this);
@@ -15,11 +16,12 @@ export default class CreateRecipe extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+            username: '',
             recipeName: '',
             description: '',
             duration: 0,
             date: new Date(),
-            tags: []
+            users: []
         }
 
     }
@@ -27,10 +29,15 @@ export default class CreateRecipe extends Component {
     // Methods start
     componentDidMount() {  // React lifecycle method; called before anything displays on page
         this.setState ({
-            // recipeName:'Input recipe name',
-            // description: 'What is in it?',
-            tags: ['Pasta', 'Pizza', 'Burger', 'Noodles']
+            users: response.data.map(user => user.username),
+            username: response.data[0].username
         })
+    }
+
+    onChangeUsername(e) {
+        this.setState({
+            username: e.target.value
+        });
     }
 
     onChangeRecipename(e) {
@@ -62,11 +69,11 @@ export default class CreateRecipe extends Component {
         e.preventDefault();
         
         const recipes = {
+            username: this.state.username,
             recipeName: this.state.recipeName,
             description: this.state.description,
             duration: this.state.duration,
-            date: this.state.date,
-            tags: this.state.tags
+            date: this.state.date
         }
         
         console.log(recipes)
@@ -81,6 +88,23 @@ export default class CreateRecipe extends Component {
         <div>
             <h3>Create New Recipe</h3>
             <form onSubmit={this.onSubmit}>
+            <div className="form-group"> 
+                    <label>User: </label>
+                    <select ref="userInput"
+                        required
+                        className="form-control"
+                        value={this.state.username}
+                        onChange={this.onChangeUsername}>
+                        {   
+                            this.state.users.map(function(user) {
+                                return <option 
+                                    key={user}
+                                    value={user}>{user}
+                                    </option>;
+                            })
+                        }
+                    </select>
+                </div>
                 <div className="form-group"> 
                     <label>Name of Recipe: </label>
                     <input  type="text"
@@ -107,23 +131,6 @@ export default class CreateRecipe extends Component {
                         value={this.state.duration}
                         onChange={this.onChangeDuration}
                         />
-                </div>
-                <div className="form-group"> 
-                    <label>Tags: </label>
-                    <select ref="userInput"
-                        required
-                        className="form-control"
-                        value={this.state.recipeName}
-                        onChange={this.onChangeRecipename}>
-                        {   
-                            this.state.tags.map(function(tag) {
-                                return <option 
-                                    key={tag}
-                                    value={tag}>{tag}
-                                    </option>;
-                            })
-                        }
-                    </select>
                 </div>
                 <div className="form-group">
                     <label>Date (of upload): </label>
