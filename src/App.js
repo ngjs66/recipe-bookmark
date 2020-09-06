@@ -26,4 +26,3 @@ function App() {
 
 export default App;
 
-// <Route path="/edit/:id" component={EditRecipe} /> 

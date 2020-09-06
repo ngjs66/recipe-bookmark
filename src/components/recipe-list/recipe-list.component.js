@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Recipe = props => (
     <tr>
@@ -24,7 +25,20 @@ export default class RecipeList extends Component {
     }
 
     // Method start
+    componentDidMount() {
+        axios.get('http://localhost:5000/recipes/')
+            .then(response => {
+                this.setState({ recipes: response.data })
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
     deleteRecipe(id) {
+        axios.delete('http://localhost:5000/recipes/'+id)
+            .then(response => { console.log(response.data)});
+            
         this.setState({
             recipes: this.state.recipes.filter(el => el._id !== id)
         })

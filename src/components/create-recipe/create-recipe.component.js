@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import axios from 'axios';
 
 export default class CreateRecipe extends Component {
     // super(props) allows us to use props of constructor
@@ -27,12 +28,20 @@ export default class CreateRecipe extends Component {
     }
 
     // Methods start
-    // componentDidMount() {  // React lifecycle method; called before anything displays on page
-    //     this.setState ({
-    //         users: response.data.map(user => user.username),
-    //         username: response.data[0].username
-    //     })
-    // }
+    componentDidMount() {  // React lifecycle method; called before anything displays on page
+        axios.get('http://localhost:5000/users/')
+            .then(response => {
+                if (response.data.length > 0) {
+                    this.setState ({
+                        users: response.data.map(user => user.username),
+                        username: response.data[0].username
+                    })
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
     onChangeUsername(e) {
         this.setState({

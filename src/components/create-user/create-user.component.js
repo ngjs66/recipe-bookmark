@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 
 export default class CreateUser extends Component {
     constructor(props) {
@@ -28,8 +28,9 @@ export default class CreateUser extends Component {
         }
     
         console.log(user);
-
-        axios.post('http://localhost/5000/users/add', user)
+        
+        // check users.js file (in routes folder). Sends a POST request.
+        axios.post('http://localhost:5000/users/add', user)
             .then(res => console.log(res.data));
 
         this.setState({
