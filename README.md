@@ -1,4 +1,14 @@
-This is an app that allows users to bookmark recipes that are provided (changes weekly). By bookmarking the recipes, users can then retrieve them and use it as an inspiration to cook something. 
+Recipe Bookmark
+===============
+
+This is an app that allows users to create a recipe playlist. 
+
+*Additional notes:* CRUD operations tested via POSTMAN is successful. 
+
+*Features yet implemented:* Search function.
+
+###### KNOWN BUGS: 
+1. GET request error
 
 The app is developed on a MERN stack.
 
