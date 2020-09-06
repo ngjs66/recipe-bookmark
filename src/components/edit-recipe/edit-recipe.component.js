@@ -23,15 +23,15 @@ export default class EditRecipe extends Component {
     }
 
     // Methods start
-    componentDidMount() {  // React lifecycle method; called before anything displays on page
-        this.setState ({
-            username: response.data.username,
-            recipeName: response.data.recipeName,
-            description: response.data.description,
-            duration: response.data.duration,
-            date: new Date(response.data.date)
-        })   
-    }
+    // componentDidMount() {  // React lifecycle method; called before anything displays on page
+    //     this.setState ({
+    //         username: response.data.username,
+    //         recipeName: response.data.recipeName,
+    //         description: response.data.description,
+    //         duration: response.data.duration,
+    //         date: new Date(response.data.date)
+    //     })   
+    // }
 
     onChangeUsername(e) {
         this.setState({
@@ -89,7 +89,7 @@ export default class EditRecipe extends Component {
             <h3>Edit Recipe</h3>
             <form onSubmit={this.onSubmit}>
                 <div className="form-group"> 
-                    <label>Username: </label>
+                    <label>User: </label>
                     <select ref="userInput"
                         required
                         className="form-control"

@@ -27,12 +27,12 @@ export default class CreateRecipe extends Component {
     }
 
     // Methods start
-    componentDidMount() {  // React lifecycle method; called before anything displays on page
-        this.setState ({
-            users: response.data.map(user => user.username),
-            username: response.data[0].username
-        })
-    }
+    // componentDidMount() {  // React lifecycle method; called before anything displays on page
+    //     this.setState ({
+    //         users: response.data.map(user => user.username),
+    //         username: response.data[0].username
+    //     })
+    // }
 
     onChangeUsername(e) {
         this.setState({
